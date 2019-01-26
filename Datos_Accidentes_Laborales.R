@@ -65,14 +65,34 @@ dfALF2007a2016Tabla1 <- as.data.frame(excelALF2007a2016Tabla1)
 dfALF2007a2016Tabla6 <- as.data.frame(excelALF2007a2016Tabla6)
 #dfALF2007a2016Tabla6$
 
+#dfALF2007a2016DefYMor1$`Nº Def__1`$
+
+#Gráficando tablas
+
+dfALF2007a2016DefYMor1 %>%
+  ggplot() +
+  aes(x = X__1, y = 'Nº Def') +
+  geom_bar(stat="identity")
+
+dfALF2007a2016DefYMor1 %>%
+  ggplot() +
+  aes(x = X__1, y = 'Nº Def__1') +
+  geom_bar(stat="identity")
+
+dfALF2007a2016DefYMor1 %>%
+  ggplot() +
+  aes(x = X__1, y = 'Nº Def__2') +
+  geom_bar(stat="identity")
+
 dfALF2007a2016Tabla6 %>%
   ggplot() +
-  aes(x = X__1, y = `2007`) +
+  aes(x = X__1, y = 'X__2') +
   geom_bar(stat="identity")
 
 
-write.table(dfALF2007a2016Tabla1, file="dfALF2007a2016Tabla1.txt")
+write.table(dfALF2007a2016M, file="dfALF2007a2016Tabla1.txt")
 write.table(dfALF2007a2016Tabla6, file="dfALF2007a2016Tabla6.txt")
+
 ######################################################################################
 ###Extrayendo titulos sobre accidentes laborales de https://www.laizquierdadiario.cl/#
 ######################################################################################
@@ -99,7 +119,10 @@ print(TitilosNoticias)
 
 dfTitulosNoticia <- as.data.frame(TitilosNoticias)
 
-# o en un txt
+#Convirtiendo tabla a csv
+write.csv(dfTitulosNoticia, file="TituloNoticia.csv")
+
+#Convirtiendo tabla a txt
 write.table(dfTitulosNoticia, file="TituloNoticia.txt")
 
 
