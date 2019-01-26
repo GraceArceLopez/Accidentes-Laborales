@@ -1,18 +1,22 @@
 setwd("~/Accidentes-Laborales")
 
-#=========== usando http://www.deis.cl/estadisticas-laborales/ ===========#
+##############################################################################
+#################usando http://www.deis.cl/estadisticas-laborales/ ############
+###############################################################################
 
 # Cómo descargar y leer un archivo excel con R
 
 # Librería para descargar la información
-install.packages("RCurl")
+# install.packages("RCurl")
 
 # Librería para leer excel
-install.packages("readxl")
+# install.packages("readxl")
+#install.packages("ggplot2")
 
 # Usando las Librerías
 library(RCurl)
-library(readxl) # Para más información de como leer excel https://www.rdocumentation.org/packages/readxl/versions/1.2.0/topics/read_excel
+library(readxl) 
+library(ggplot2)
 
 # Descargando el archivo Excel
 # download.file(URL_file ,destfile=Nombre_Local ,mode="wb")
@@ -40,8 +44,13 @@ print(excelALF2007a2016DefYMor2)
 dfALF2007a2016DefYMor1 <- as.data.frame(excelALF2007a2016DefYMor1)
 dfALF2007a2016DefYMor2 <- as.data.frame(excelALF2007a2016DefYMor2)
 
+#Almacenando la información en 
 write.table(dfALF2007a2016DefYMor1, file="dfALF2007a2016DefYMor1.txt")
 write.table(dfALF2007a2016DefYMor2, file="dfALF2007a2016DefYMor2.txt")
+
+#Almacenando la información en csv
+write.csv(dfALF2007a2016DefYMor1, file="dfALF2007a2016DefYMor1.csv")
+write.csv(dfALF2007a2016DefYMor2, file="dfALF2007a2016DefYMor2.csv")
 
 # Leyendo el excel con rangos definidos y otro sheet o hoja
 excelALF2007a2016Tabla1 <- read_excel("Accidentes-laborales-fatales-2007-2016.xlsx", range = "Tabla 1!A7:BJ25")
@@ -54,11 +63,19 @@ print(excelALF2007a2016Tabla6)
 # Convirtiendo a data frame
 dfALF2007a2016Tabla1 <- as.data.frame(excelALF2007a2016Tabla1)
 dfALF2007a2016Tabla6 <- as.data.frame(excelALF2007a2016Tabla6)
+#dfALF2007a2016Tabla6$
+
+dfALF2007a2016Tabla6 %>%
+  ggplot() +
+  aes(x = X__1, y = `2007`) +
+  geom_bar(stat="identity")
+
 
 write.table(dfALF2007a2016Tabla1, file="dfALF2007a2016Tabla1.txt")
 write.table(dfALF2007a2016Tabla6, file="dfALF2007a2016Tabla6.txt")
-
-#Extrayendo titulos sobre accidentes laborales
+######################################################################################
+###Extrayendo titulos sobre accidentes laborales de https://www.laizquierdadiario.cl/#
+######################################################################################
 
 # Usando la librerÃ�a rvest
 library('rvest')
